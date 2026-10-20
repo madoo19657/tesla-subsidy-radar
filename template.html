@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>테슬라 전기차 보조금 현황 2026 | 전국 지역별 금액·잔여 대수 — madoo</title>
+<meta name="description" content="내 지역에서 테슬라 전기차 보조금을 얼마 받는지, 접수는 열려 있는지 한 번에 확인하세요. 전국 지자체 공식 데이터(ev.or.kr) 기준 — madoo">
+<link rel="canonical" href="https://madoo19657.github.io/tesla-subsidy-radar/">
+<meta property="og:url" content="https://madoo19657.github.io/tesla-subsidy-radar/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="테슬라 전기차 보조금 현황 2026 — madoo">
+<meta property="og:description" content="내 지역 테슬라 보조금 금액과 접수 상태, 잔여 대수를 한눈에. ev.or.kr 공식 데이터 기준.">
+<meta name="theme-color" content="#14171a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314171a'/%3E%3Ccircle cx='12' cy='16' r='7' fill='%23f5f6f6'/%3E%3Ccircle cx='21' cy='16' r='7' fill='%23c8964a' fill-opacity='.9'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --snow:#f5f6f6;--paper:#ffffff;--ink:#14171a;--slate:#5b6470;--hair:#dfe3e7;--tint:#eceff1;
+  --brass:#b98a3e;--brass-soft:#ead9b8;
+  --go:#17803d;--hot:#c93c37;--soon:#4a5fc1;--rest:#8a929c;
+  --shadow:0 1px 0 rgba(20,23,26,.04);
+  --f:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]){--snow:#101214;--paper:#171a1d;--ink:#eef0f1;--slate:#9aa3ad;--hair:#2a2f34;--tint:#1e2226;
+  --brass:#d1a257;--brass-soft:#4a3a1d;--go:#4cc07a;--hot:#ef6b66;--soon:#8c9cf0;--rest:#6f7882}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--snow);color:var(--ink);font:15px/1.6 var(--f);font-feature-settings:"tnum" 1}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px 48px}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:4px}
+button{font:inherit;color:inherit}
+
+/* identity */
+.top{display:flex;align-items:center;justify-content:space-between;padding:18px 0 14px;border-bottom:1px solid var(--hair)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.wm{font-weight:760;font-size:23px;letter-spacing:-.045em;line-height:1;display:inline-flex;align-items:center}
+.wm svg{height:.68em;width:1.28em;margin-left:.05em;transform:translateY(.02em)}
+.brand small{color:var(--slate);font-size:12.5px;padding-left:12px;border-left:1px solid var(--hair);line-height:1.2}
+.top .asof{color:var(--slate);font-size:12.5px;text-align:right}
+
+h1{font-size:clamp(28px,5.4vw,46px);line-height:1.12;letter-spacing:-.035em;font-weight:720;margin:34px 0 8px;max-width:16em;word-break:keep-all;text-wrap:balance}
+.lede{color:var(--slate);margin:0 0 26px;max-width:36em;word-break:keep-all}
+
+/* calculator */
+.calc{background:var(--paper);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.pick{display:grid;gap:14px;padding:18px 20px;border-bottom:1px solid var(--hair);grid-template-columns:1fr}
+.lbl{font-size:12.5px;color:var(--slate);margin-bottom:6px;display:block}
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.seg button{cursor:pointer;text-align:left;background:var(--snow);border:1px solid var(--hair);border-radius:10px;padding:9px 12px;line-height:1.25;transition:border-color .15s,background .15s}
+.seg button b{display:block;font-weight:650;font-size:14.5px}
+.seg button span{font-size:12.5px;color:var(--slate)}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--snow);border-color:var(--ink)}
+.seg button[aria-pressed=true] span{color:color-mix(in srgb,var(--snow) 70%,transparent)}
+.where{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+select{width:100%;appearance:none;background:var(--snow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238a929c' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 12px center;color:inherit;border:1px solid var(--hair);border-radius:10px;padding:10px 34px 10px 12px;font:inherit;cursor:pointer}
+.res{display:grid;grid-template-columns:1fr;gap:6px 28px;padding:22px 20px 24px}
+.amount{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.amount b{font-size:clamp(64px,15vw,112px);line-height:.95;font-weight:300;letter-spacing:-.05em}
+.amount span{font-size:22px;color:var(--slate);letter-spacing:-.02em}
+.crumb{font-size:14px;color:var(--slate);margin-bottom:8px}
+.crumb strong{color:var(--ink);font-weight:650}
+.split{display:flex;gap:22px;margin:16px 0 4px;flex-wrap:wrap}
+.split div{font-size:13px;color:var(--slate);display:flex;align-items:center;gap:8px}
+.split i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.split b{color:var(--ink);font-size:16px;font-weight:650}
+.dot-g{background:var(--ink)}.dot-l{background:var(--brass)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:18px 0 0}
+.facts div{background:var(--paper);border:1px solid var(--hair);border-radius:12px;padding:11px 14px}
+.facts dt{font-size:12px;color:var(--slate);margin:0}
+.facts dd{margin:2px 0 0;font-weight:650;font-size:16px}
+.facts dd small{font-weight:450;color:var(--slate);font-size:12.5px}
+.oo{width:100%;max-width:340px;justify-self:center;align-self:center}
+.oo svg{width:100%;height:auto;display:block;overflow:visible}
+.oo circle{transition:r .45s cubic-bezier(.2,.7,.2,1),cx .45s cubic-bezier(.2,.7,.2,1)}
+.oo text{font:600 15px var(--f);letter-spacing:-.02em}
+.empty{padding:6px 0 2px;color:var(--slate);max-width:32em}
+.empty b{color:var(--ink);display:block;font-size:19px;margin-bottom:4px;letter-spacing:-.02em}
+@media(min-width:760px){
+  .pick{grid-template-columns:1.6fr 1fr;align-items:end}
+  .res{grid-template-columns:1.25fr .75fr}
+  .res .oo{grid-column:2;grid-row:1 / span 5}
+}
+
+/* status tag */
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.st::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.s-접수중{color:var(--go)}.s-마감임박{color:var(--hot)}.s-접수예정{color:var(--soon)}
+.s-접수종료{color:var(--rest)}.s-예산소진{color:var(--rest)}
+.s-예산소진::before{background:transparent;box-shadow:inset 0 0 0 1.6px currentColor}
+
+/* national */
+h2{font-size:20px;letter-spacing:-.025em;margin:44px 0 4px}
+.sub2{color:var(--slate);font-size:13.5px;margin:0 0 16px}
+.tally{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tally button{cursor:pointer;background:var(--paper);border:1px solid var(--hair);border-radius:99px;padding:6px 13px;font-size:13.5px;display:inline-flex;gap:8px;align-items:center}
+.tally button b{font-weight:700}
+.tally button[aria-pressed=true]{background:var(--ink);color:var(--snow);border-color:var(--ink)}
+.tally .lead{background:transparent;border-style:dashed}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{cursor:pointer;border:1px solid var(--hair);background:transparent;border-radius:99px;padding:3px 11px;font-size:13px;color:var(--slate)}
+.chip[aria-pressed=true]{background:var(--tint);color:var(--ink);border-color:var(--slate)}
+.find{border:1px solid var(--hair);background:var(--paper);border-radius:10px;padding:8px 12px;font:inherit;color:inherit;width:100%;max-width:260px}
+.tw{background:var(--paper);border:1px solid var(--hair);border-radius:14px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:660px}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--hair);white-space:nowrap}
+th{font-weight:600;font-size:12.5px;color:var(--slate);cursor:pointer;user-select:none;background:var(--paper)}
+th:first-child,td:first-child,th.l,td.l{text-align:left}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--snow)}
+tbody tr:last-child td{border-bottom:0}
+td .rg{color:var(--slate);font-size:12px;margin-right:6px}
+.mini{display:inline-flex;align-items:center;gap:10px;justify-content:flex-end}
+.mini .bar{width:92px;height:8px;border-radius:4px;background:var(--tint);overflow:hidden;display:inline-flex}
+.mini .bar i{display:block;height:100%}
+.mini .bar i:first-child{background:var(--ink)}
+.mini .bar i:last-child{background:var(--brass)}
+.mini b{min-width:3.2em;text-align:right;font-weight:650}
+.na{color:var(--rest);font-size:13px}
+
+footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--hair);color:var(--slate);font-size:12.5px;line-height:1.75}
+footer ul{margin:8px 0 0;padding-left:1.1em}
+.sig{display:flex;align-items:center;gap:10px;margin-top:18px;color:var(--ink);font-size:13px}
+.sig .wm{font-size:17px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="oo" viewBox="0 0 34 18">
+    <circle cx="9" cy="9" r="8.4" fill="currentColor"/>
+    <circle cx="25" cy="9" r="8.4" fill="#c8964a" fill-opacity=".92"/>
+  </symbol>
+</svg>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#" aria-label="madoo">
+      <span class="wm">mad<svg aria-hidden="true" viewBox="0 0 34 18"><use href="#oo"/></svg></span>
+      <small>전기차 보조금<br>레이더</small>
+    </a>
+    <div class="asof" id="asof"></div>
+  </header>
+
+  <h1 id="h1">테슬라 전기차 보조금, 내 지역에서 얼마 받을까</h1>
+  <p class="lede">국비와 지방비를 합친 보조금 금액과 접수 상태를 지역별로 확인하세요. 금액은 모델별, 잔여 대수는 지자체 전체 기준입니다.</p>
+
+  <section class="calc" id="calc" aria-label="내 지역 보조금 계산">
+    <div class="pick">
+      <div><span class="lbl">모델</span><div class="seg" id="seg"></div></div>
+      <div><span class="lbl">지역</span>
+        <div class="where"><select id="selSido" aria-label="시도"></select><select id="selGu" aria-label="시군구"></select></div>
+      </div>
+    </div>
+    <div class="res" id="res"></div>
+  </section>
+
+  <h2>지역 비교</h2>
+  <p class="sub2" id="sub2"></p>
+  <div class="tally" id="tally"></div>
+  <div class="tools" id="chips"></div>
+  <div class="tools"><input class="find" id="q" placeholder="지역 검색 (예: 수원)" aria-label="지역 검색"></div>
+  <div class="tw"><table>
+    <thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody>
+  </table></div>
+
+  <footer>
+    <ul>
+      <li>데이터 갱신: 평일 하루 3회(오전 9시 · 오후 1시 · 오후 6시 경)와 일요일 새벽 1회(정합성 검증). 지자체 접수·승인 처리가 평일 업무시간에 이뤄지기 때문입니다. 접수 상태(접수중·접수 예정 등)는 페이지를 연 시각 기준으로 계산하지만, 잔여 대수는 마지막 갱신 시점 값이라 실제와 다를 수 있습니다.</li>
+      <li>출처: 환경부 무공해차 통합누리집(ev.or.kr) 지자체별 보조금 현황, 지자체별 차종·모델 보조금. 전기승용 민간 구매 기준.</li>
+      <li>금액은 만원 단위입니다. 소계 = 국비 + 지방비이며, 전환지원금은 소계에 포함되지 않습니다.</li>
+      <li>잔여 대수(선정잔여 = 공고 − 선정)는 브랜드별이 아니라 지자체 전체 수치입니다. 실제 신청 가능 대수와 다를 수 있습니다.</li>
+      <li>"등록 없음"은 ev.or.kr 에 해당 모델이 조회되지 않는다는 뜻입니다. 지원 여부는 해당 지자체에 확인하세요.</li>
+      <li>상태 — 예산 소진: 선정잔여 0 · 접수중: 마감 전이며 잔여 있음 · 마감 임박: 잔여 10% 미만 또는 신청마감 7일 이내 · 접수 예정: 다음 접수 시작 전 · 접수 종료: 잔여는 있으나 접수가 마감 처리됨.</li>
+      <li>이 페이지는 비공식 정보 페이지이며 테슬라 및 정부 기관과 관련이 없습니다.</li>
+    </ul>
+    <div class="sig"><span class="wm" aria-label="madoo">mad<svg aria-hidden="true" viewBox="0 0 34 18"><use href="#oo"/></svg></span><span>국비와 지방비, 두 개의 O로 만든 보조금 기록</span></div>
+  </footer>
+</div>
+<script>
+const EMBED = /*DATA*/null;
+const ORDER={"마감임박":0,"접수중":1,"접수예정":2,"접수종료":3,"예산소진":4};
+const $=id=>document.getElementById(id);
+const n=v=>v.toLocaleString("ko-KR");
+let DATA=[],MODELS=[],S={m:0,sido:"서울",key:null,filt:"all",sidoF:"전체",sort:{k:"total",d:-1}};
+
+function kstNow(){const p=Object.fromEntries(new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(x=>[x.type,x.value]));return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`}
+const day=s=>Date.parse(s.slice(0,10)+"T00:00:00Z")/864e5;
+const key=r=>r.sido+"|"+r.name;
+const single=r=>/(특별시|광역시|특별자치시|특별자치도)$/.test(r.name);
+const show=r=>single(r)?r.name:r.name;
+function prep(raw){
+  const now=kstNow(),today=day(now);
+  return raw.regions.filter(r=>r.sido!=="공단").map(r=>{
+    let st,d=null;const w=r.win,dl=r.deadline.replace(/\./g,"-").replace(" ","T");
+    if(r.selRemain<=0) st="예산소진";
+    else if(w&&w[0]>now){st="접수예정";d=day(w[0])-today}
+    else if(r.closed) st="접수종료";
+    else if(w&&w[0]<=now&&now<=w[1]){const left=day(dl)-today;st=(r.selRemain/Math.max(r.notice,1)<.1||left<=7)?"마감임박":"접수중"}
+    else st="접수종료";
+    return {...r,status:st,dday:d,rate:r.notice?Math.min(100,Math.round(r.sel/r.notice*100)):0,deadline:r.deadline.slice(0,10).replace(/\./g,"-"),pol:r.pol||{}};
+  });
+}
+const label=r=>r.status==="접수예정"?`접수 예정 D-${r.dday}`:{"마감임박":"마감 임박","접수중":"접수중","접수종료":"접수 종료","예산소진":"예산 소진"}[r.status];
+const tag=r=>`<span class="st s-${r.status}">${label(r)}</span>`;
+const mname=m=>{const x=MODELS[m].match(/^(?:\(([^)]+)\)\s*)?(Model [3YSX]) ?(.*)$/i);return x?[x[2],((x[1]?x[1]+" ":"")+x[3]).trim()||"기본"]:[MODELS[m],""]};
+const P=(r,m)=>r.pol[m]?{gov:r.pol[m][0],loc:r.pol[m][1],tot:r.pol[m][0]+r.pol[m][1],xg:r.pol[m][2],xl:r.pol[m][3]}:null;
+
+/* ---- calculator ---- */
+function buildPickers(){
+  $("seg").innerHTML=MODELS.map((_,i)=>{const [a,b]=mname(i);return `<button type="button" data-m="${i}" aria-pressed="${i===S.m}"><b>${a}</b><span>${b}</span></button>`}).join("");
+  $("seg").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.m=+b.dataset.m;paint()});
+  const sidos=[...new Set(DATA.map(r=>r.sido))];
+  $("selSido").innerHTML=sidos.map(s=>`<option ${s===S.sido?"selected":""}>${s}</option>`).join("");
+  $("selSido").onchange=e=>{S.sido=e.target.value;S.key=null;paint()};
+  $("selGu").onchange=e=>{S.key=e.target.value;paint()};
+}
+function circles(p){
+  const k=3.9,r1=k*Math.sqrt(p.gov),r2=Math.max(0,k*Math.sqrt(p.loc)),W=340,H=210,cy=H/2;
+  const gap=(r1+r2)*.72,x1=W/2-gap/2-(r2-r1)*.15,x2=x1+gap;
+  const loc=p.loc>0?`<circle cx="${x2}" cy="${cy}" r="${r2}" fill="var(--brass)" fill-opacity=".9"/><text x="${x2+r2*.28}" y="${cy+5}" text-anchor="middle" fill="#14171a">${p.loc}</text>`
+    :`<circle cx="${x2}" cy="${cy}" r="26" fill="none" stroke="var(--brass)" stroke-width="1.6" stroke-dasharray="3 4"/><text x="${x2}" y="${cy+5}" text-anchor="middle" fill="var(--slate)">0</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="국비 ${p.gov}만원, 지방비 ${p.loc}만원"><circle cx="${x1}" cy="${cy}" r="${r1}" fill="var(--ink)"/><text x="${x1-r1*.28}" y="${cy+5}" text-anchor="middle" fill="var(--snow)">${p.gov}</text>${loc}</svg>`;
+}
+function paintResult(){
+  const reg=DATA.filter(r=>r.sido===S.sido);
+  if(!S.key||!reg.some(r=>key(r)===S.key))S.key=key(reg[0]);
+  $("selGu").innerHTML=reg.map(r=>`<option value="${key(r)}" ${key(r)===S.key?"selected":""}>${r.name}</option>`).join("");
+  const r=DATA.find(x=>key(x)===S.key),p=P(r,S.m),[a,b]=mname(S.m);
+  const crumb=`<div class="crumb"><strong>${r.sido==="서울"||single(r)?r.name:r.sido+" "+r.name}</strong>에서 ${a} ${b}를 사면</div>`;
+  const facts=`<dl class="facts">
+    <div><dt>접수 상태</dt><dd>${tag(r)}</dd></div>
+    <div><dt>선정 기준 잔여</dt><dd>${n(r.selRemain)}대 <small>/ 공고 ${n(r.notice)}</small></dd></div>
+    <div><dt>신청 마감</dt><dd>${r.deadline}</dd></div></dl>`;
+  if(!p){
+    const any=Object.keys(r.pol).length;
+    $("res").innerHTML=`<div>${crumb}<div class="empty"><b>${any?"이 모델은 등록 없음":"테슬라 보조금 정보 없음"}</b>${any?"ev.or.kr 에서 이 지역의 해당 모델이 조회되지 않습니다. 다른 모델을 선택하거나 지자체에 지원 여부를 확인하세요.":"ev.or.kr 에서 이 지역의 테슬라 모델이 조회되지 않습니다. 지자체에 지원 여부를 확인하세요."}</div>${facts}</div>`;
+    return;
+  }
+  const conv=p.xg+p.xl;
+  $("res").innerHTML=`<div>${crumb}<div class="amount"><b>${n(p.tot)}</b><span>만원</span></div>
+    <div class="split"><div><i class="dot-g"></i>국비 <b>${n(p.gov)}</b></div><div><i class="dot-l"></i>지방비 <b>${n(p.loc)}</b></div></div>
+    <div class="crumb" style="margin:6px 0 0">전환지원금 ${conv}만원은 소계에 포함되지 않습니다 (국비 ${p.xg} · 지방비 ${p.xl})</div>${facts}</div>
+    <div class="oo">${circles(p)}</div>`;
+}
+
+/* ---- comparison table ---- */
+const COLS=[["name","지역",1],["status","상태",1],["total","보조금 (만원)"],["selRemain","선정잔여"],["rate","소진율"],["deadline","신청마감",1]];
+function paintTable(){
+  const cnt={};DATA.forEach(r=>cnt[r.status]=(cnt[r.status]||0)+1);
+  const avail=DATA.filter(r=>r.status==="접수중"||r.status==="마감임박");
+  $("sub2").textContent=`신청 가능 ${avail.length}곳 · 선정 기준 잔여 ${n(avail.reduce((s,r)=>s+r.selRemain,0))}대 (지자체 전체 기준). 지역을 누르면 위 계산기에 반영됩니다.`;
+  const opts=[["all","전체"],["avail","신청 가능"],...Object.keys(ORDER).map(s=>[s,{"마감임박":"마감 임박","접수중":"접수중","접수예정":"접수 예정","접수종료":"접수 종료","예산소진":"예산 소진"}[s]])];
+  $("tally").innerHTML=opts.map(([v,t])=>{const c=v==="all"?DATA.length:v==="avail"?avail.length:(cnt[v]||0);return `<button type="button" data-v="${v}" aria-pressed="${S.filt===v}">${t}<b>${c}</b></button>`}).join("");
+  $("tally").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.filt=b.dataset.v;paintTable()});
+  const sidos=["전체",...new Set(DATA.map(r=>r.sido))];
+  $("chips").innerHTML=sidos.map(s=>`<button type="button" class="chip" data-s="${s}" aria-pressed="${s===S.sidoF}">${s}</button>`).join("");
+  $("chips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{S.sidoF=b.dataset.s;paintTable()});
+  $("thead").innerHTML=COLS.map(([k,t,l])=>`<th class="${l?"l":""}" data-k="${k}">${t}${S.sort.k===k?(S.sort.d<0?" ▼":" ▲"):""}</th>`).join("");
+  $("thead").querySelectorAll("th").forEach(h=>h.onclick=()=>{const k=h.dataset.k;S.sort=S.sort.k===k?{k,d:-S.sort.d}:{k,d:-1};paintTable()});
+  const q=$("q").value.trim();
+  const max=Math.max(1,...DATA.map(r=>(P(r,S.m)||{tot:0}).tot));
+  let rows=DATA.filter(r=>(S.sidoF==="전체"||r.sido===S.sidoF)&&(!q||(r.sido+r.name).includes(q))&&(S.filt==="all"||(S.filt==="avail"?(r.status==="접수중"||r.status==="마감임박"):r.status===S.filt)));
+  const val=r=>S.sort.k==="total"?(P(r,S.m)?P(r,S.m).tot:-1):r[S.sort.k];
+  rows.sort((a,b)=>{if(ORDER[a.status]!==ORDER[b.status])return ORDER[a.status]-ORDER[b.status];const x=val(a),y=val(b);return (typeof x==="string"?x.localeCompare(y,"ko"):x-y)*S.sort.d});
+  $("tbody").innerHTML=rows.map(r=>{const p=P(r,S.m);
+    const amt=p?`<span class="mini"><span class="bar"><i style="width:${p.gov/max*100}%"></i><i style="width:${p.loc/max*100}%"></i></span><b>${n(p.tot)}</b></span>`:`<span class="na">등록 없음</span>`;
+    return `<tr data-k="${key(r)}"><td><span class="rg">${r.sido}</span>${r.name}</td><td class="l">${tag(r)}</td><td>${amt}</td><td><b>${n(r.selRemain)}</b></td><td>${r.rate}%</td><td class="l">${r.deadline}</td></tr>`}).join("")
+    ||`<tr><td colspan="6" class="l">조건에 맞는 지역이 없습니다. 필터를 바꿔 보세요.</td></tr>`;
+  $("tbody").querySelectorAll("tr[data-k]").forEach(tr=>tr.onclick=()=>{const [s]=tr.dataset.k.split("|");S.sido=s;S.key=tr.dataset.k;$("selSido").value=s;paint();$("calc").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"})});
+}
+function paint(){
+  $("seg").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.m===S.m)));
+  paintResult();paintTable();
+}
+function start(raw){
+  MODELS=raw.models||[];DATA=prep(raw);
+  const cov=MODELS.map((_,i)=>DATA.filter(r=>r.pol[i]).length);S.m=Math.max(0,cov.indexOf(Math.max(...cov)));
+  $("asof").innerHTML=new Intl.DateTimeFormat("ko-KR",{timeZone:"Asia/Seoul",month:"long",day:"numeric",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(raw.asOf))+" 조회<br>평일 3회·일요일 새벽 갱신 · 접수 상태는 열어본 시각 기준";
+  if(!MODELS.length){$("res").innerHTML='<div class="empty"><b>테슬라 금액 데이터가 아직 없습니다</b>수집이 끝나면 이곳에 표시됩니다.</div>';paintTable();return}
+  buildPickers();$("q").oninput=paintTable;paint();
+}
+fetch("data.json",{cache:"no-store"}).then(r=>r.ok?r.json():Promise.reject()).then(start).catch(()=>start(EMBED));
+</script>
+</body>
+</html>
